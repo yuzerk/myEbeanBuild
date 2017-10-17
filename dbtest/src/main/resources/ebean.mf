@@ -1,0 +1,3 @@
+entity-packages: com.example.ebean.account.entity
+transactional-packages: org.example.sboot
+querybean-packages: none
