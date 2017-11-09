@@ -1,4 +1,4 @@
-package com.example.ebean.ebeanServer;
+package com.example.ebean.common.ebeanServer;
 
 import io.ebean.EbeanServer;
 import io.ebean.EbeanServerFactory;
