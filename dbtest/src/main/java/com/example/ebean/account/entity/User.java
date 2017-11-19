@@ -1,10 +1,9 @@
 package com.example.ebean.account.entity;
 
 
-import io.ebean.Model;
+import com.example.ebean.common.basic.BaseEntity;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -13,22 +12,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "User")
-public class User extends Model {
-
-    @Id
-    private Long id;
+public class User extends BaseEntity{
 
     private String name;
     private String password;
-
-    public Long getId() {
-        return id;
-    }
-
-    public User setId(Long id) {
-        this.id = id;
-        return this;
-    }
 
     public String getName() {
         return name;

@@ -2,6 +2,7 @@ package com.example.ebean.common.ebeanServer;
 
 import io.ebean.EbeanServer;
 import io.ebean.EbeanServerFactory;
+import io.ebean.config.MatchingNamingConvention;
 import io.ebean.config.ServerConfig;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,7 @@ public class EbeanFactoryBean implements FactoryBean<EbeanServer> {
 //    config.setExternalTransactionManager(new SpringAwareJdbcTransactionManager());
 
     config.loadFromProperties();
+    config.setNamingConvention(new MatchingNamingConvention());
     
     // set as default and register so that Model can be
     // used if desired for save() and update() etc
