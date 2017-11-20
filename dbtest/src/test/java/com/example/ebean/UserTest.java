@@ -24,6 +24,11 @@ public class UserTest {
         System.out.println(findDifferent(a,b));
     }
 
+    @Test
+    public void redisTest() {
+
+    }
+
     private String findDifferent(String origin, String compare) {
         if(origin.length() != compare.length()) {
             return null;
