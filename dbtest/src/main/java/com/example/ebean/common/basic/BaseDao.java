@@ -2,10 +2,12 @@ package com.example.ebean.common.basic;
 
 import io.ebean.EbeanServer;
 import io.ebean.Query;
+import io.ebean.UpdateQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Collection;
 
 /**
  * @author yuzk
@@ -22,11 +24,6 @@ public class BaseDao<T>{
         this.clazz = getEntityClass();
     }
 
-    public Query<T> createQuery() {
-        return server.createQuery(clazz);
-    }
-
-
     private Class getEntityClass() {
         Class entityClass = null;
         Type t = getClass().getGenericSuperclass();
@@ -35,5 +32,28 @@ public class BaseDao<T>{
             entityClass = (Class) p[0];
         }
         return entityClass;
+    }
+
+    //-----------------------   sql  操作   --------------------------------
+
+    public Query<T> createQuery(){
+        return server.createQuery(clazz);
+    }
+
+    public T findById(String id) {
+        return server.find(clazz,id);
+    }
+
+    public void saveOrUpdate(Object object) {
+
+        if(object instanceof Collection<?>) {
+            server.saveAll((Collection<T>) object);
+            return;
+        }
+        server.save(object);
+    }
+
+    public UpdateQuery<T> updateQuery() {
+        return server.update(clazz);
     }
 }
