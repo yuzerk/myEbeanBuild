@@ -31,7 +31,7 @@ public class EbeanFactoryBean implements FactoryBean<EbeanServer> {
 
     config.loadFromProperties();
     config.setNamingConvention(new MatchingNamingConvention());
-    
+
     // set as default and register so that Model can be
     // used if desired for save() and update() etc
     config.setDefaultServer(true);

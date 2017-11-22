@@ -51,4 +51,8 @@ public class UserService extends BaseService<UserDao> {
             throw new ProtocolNotMatchException("ProtocolNotMatch");
         }
     }
+
+    public void insert(User user) {
+        dao.saveOrUpdate(user);
+    }
 }

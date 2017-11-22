@@ -13,7 +13,7 @@ import java.util.Collection;
  * @author yuzk
  * @date 2017/11/7
  */
-public class BaseDao<T>{
+public class BaseDao<T> extends BaseProsessor{
 
     private Class<T> clazz;
 

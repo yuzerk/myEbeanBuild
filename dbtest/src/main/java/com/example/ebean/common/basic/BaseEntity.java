@@ -2,6 +2,7 @@ package com.example.ebean.common.basic;
 
 import io.ebean.Model;
 
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -12,7 +13,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class BaseEntity extends Model{
 
-    @Id
+    @Id @GeneratedValue(generator = "UUID")
     private String Id;
 
     public String getId() {
