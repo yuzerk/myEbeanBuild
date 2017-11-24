@@ -1,11 +1,11 @@
 package com.example.ebean.common.basic;
 
 import io.ebean.EbeanServer;
+import io.ebean.OrderBy;
 import io.ebean.Query;
 import io.ebean.UpdateQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
@@ -39,6 +39,10 @@ public class BaseDao<T> extends BaseProsessor{
 
     public Query<T> createQuery(){
         return server.createQuery(clazz);
+    }
+
+    public OrderBy<T> createOrderBy() {
+        return server.createQuery(clazz).orderBy();
     }
 
     public T findById(String id) {

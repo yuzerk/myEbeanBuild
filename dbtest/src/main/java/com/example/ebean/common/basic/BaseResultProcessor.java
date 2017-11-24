@@ -65,13 +65,14 @@ public class BaseResultProcessor extends BaseProsessor{
         Integer skip = pagedList.getSkip();
         Integer pageSize = pagedList.getPageSize();
 
-        if(total <= skip * pageSize) {
-            pagedList.setFirstRow(total);
-            pagedList.setMaxRow(total);
+
+        if(isEmpty(total) || total > skip * pageSize) {
+            pagedList.setFirstRow(skip * pageSize);
             return;
         }
 
-        pagedList.setFirstRow(skip * pageSize);
-        pagedList.setMaxRow((skip+1) * pageSize);
+        if(total <= skip * pageSize) {
+            pagedList.setFirstRow(total);
+        }
     }
 }

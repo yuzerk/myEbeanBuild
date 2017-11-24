@@ -28,10 +28,14 @@ public class CustomerService extends BaseService<CustomerDao>{
 
     public List<Customer> gets(MyPagedList<Customer> pagedList) {
         operatorPage(pagedList);
-        PagedList<Customer> customers =  dao.createQuery().orderBy().asc("name")
+        PagedList<Customer> customers =  dao.createOrderBy().asc("name")
                 .setFirstRow(pagedList.getFirstRow())
-                .setMaxRows(pagedList.getMaxRow())
+                .setMaxRows(pagedList.getPageSize())
                 .findPagedList();
+        if(isEmpty(pagedList.getTotal())) {
+            pagedList.setTotal(customers.getTotalCount());
+        }
+        //还可以返回成一个PagedList
         return customers.getList();
     }
 }

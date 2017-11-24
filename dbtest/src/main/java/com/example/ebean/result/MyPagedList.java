@@ -10,7 +10,6 @@ public class MyPagedList<T> {
     private Integer total;
     private Integer pageSize;
     private Integer firstRow;
-    private Integer maxRow;
     private T data;
 
     public Integer getSkip() {
@@ -55,15 +54,6 @@ public class MyPagedList<T> {
 
     public MyPagedList setFirstRow(Integer firstRow) {
         this.firstRow = firstRow;
-        return this;
-    }
-
-    public Integer getMaxRow() {
-        return maxRow;
-    }
-
-    public MyPagedList setMaxRow(Integer maxRow) {
-        this.maxRow = maxRow;
         return this;
     }
 }
