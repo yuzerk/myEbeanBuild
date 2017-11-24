@@ -1,6 +1,9 @@
 package com.example.ebean.common.basic;
 
+import com.example.ebean.result.MyPagedList;
 import com.example.ebean.result.Result;
+import io.ebean.PagedList;
+import jodd.madvoc.meta.In;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
@@ -54,5 +57,21 @@ public class BaseResultProcessor extends BaseProsessor{
 
         return new Result().setRet(1).setData(data);
 
+    }
+
+    protected void operatorPage(MyPagedList pagedList) {
+
+        Integer total = pagedList.getTotal();
+        Integer skip = pagedList.getSkip();
+        Integer pageSize = pagedList.getPageSize();
+
+        if(total <= skip * pageSize) {
+            pagedList.setFirstRow(total);
+            pagedList.setMaxRow(total);
+            return;
+        }
+
+        pagedList.setFirstRow(skip * pageSize);
+        pagedList.setMaxRow((skip+1) * pageSize);
     }
 }
