@@ -5,6 +5,7 @@ import io.ebean.Query;
 import io.ebean.UpdateQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
