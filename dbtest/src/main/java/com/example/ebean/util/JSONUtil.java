@@ -1,5 +1,8 @@
 package com.example.ebean.util;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import jodd.json.JsonParser;
 import jodd.json.JsonSerializer;
 import jodd.util.StringUtil;
@@ -63,4 +66,16 @@ public class JSONUtil {
         return (T) new JsonParser().looseMode(true).parse(value, bean);
     }
 
+    /**
+     * 格式化输出json字符串
+     *
+     * @param jsonString
+     * @return
+     */
+    public static String format(String jsonString) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        com.google.gson.JsonParser jp = new com.google.gson.JsonParser();
+        JsonElement je = jp.parse(jsonString);
+        return gson.toJson(je);
+    }
 }

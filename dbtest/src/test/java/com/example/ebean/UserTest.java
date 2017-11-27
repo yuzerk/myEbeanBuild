@@ -1,5 +1,9 @@
 package com.example.ebean;
 
+import com.example.ebean.modules.oneToManyTest.entity.Customer;
+import com.example.ebean.result.MyPagedList;
+import com.example.ebean.test.BaseApiTest;
+import com.example.ebean.util.JSONUtil;
 import com.example.ebean.util.UuidUtil;
 import org.junit.Test;
 
@@ -7,7 +11,7 @@ import org.junit.Test;
  * @author yuzk
  * @date 2017/11/8
  */
-public class UserTest {
+public class UserTest extends BaseApiTest{
 
     @Test
     public void serviceTest() {
@@ -18,41 +22,35 @@ public class UserTest {
     }
 
     @Test
-    public void stringEqual() {
-        String a = "Dawson@yealink.com,Lydia@yealink.com,zhongh@yealink.com,dawson@yealink.com,xieql@yealink.com,yerj@yealink.com,changk@yealink.com,chenjx@yealink.com,charry@yealink.com,lydia@yealink.com,zjl@yealink.com,huangxp@yealink.com,xiewei@yealink.com,liangf@yealink.com,nibl@yealink.com,zhongh@yealink.com,yuzk@yealink.com,chenyuany@yealink.com,shizh@yealink.com,zhangqy@yealink.com,yxl@yealink.com,shijk@yealink.com,baiyf@yealink.com,923085715@qq.com,wo2024024@163.com,cjq@yealink.com,lyh@yealink.com,wangqiuy@yealink.com,guoj@yealink.com,huangxb@yealink.com,laiyl@yealink.com,linzw@yealink.com,zhangzf@yealink.com,zhongfb@yealink.com,chenjk@yealink.com,zhangj@yealink.com,qixl@yealink.com,linhh@yealink.com,fanghf@yealink.com,fangwq@yealink.com,syz@yealink.com,pjb@yealink.com,suncw@yealink.com,shijk@yealink.com,yxl@yealink.com,wangqiuy@yealink.com,kongdq@yealink.com,lyh@yealink.com,chensw@yealink.com";
-        String b = "Dawson@yealink.com,Lydia@yealink.com,zhongh@yealink.com,dawson@yealink.com,xieql@yealink.com,yerj@yealink.com,changk@yealink.com,chenjx@yealink.com,charry@yealink.com,lydia@yealink.com,zjl@yealink.com,huangxp@yealink.com,xiewei@yealink.com,liangf@yealink.com,nibl@yealink.com,zhongh@yealink.com,yuzk@yealink.com,chenyuany@yealink.com,shizh@yealink.com,zhangqy@yealink.com,yxl@yealink.com,shijk@yealink.com,baiyf@yealink.com,923085715@qq.com,wo2024204@163.com,cjq@yealink.com,lyh@yealink.com,wangqiuy@yealink.com,guoj@yealink.com,huangxb@yealink.com,laiyl@yealink.com,linzw@yealink.com,zhangzf@yealink.com,zhongfb@yealink.com,chenjk@yealink.com,zhangj@yealink.com,qixl@yealink.com,linhh@yealink.com,fanghf@yealink.com,fangwq@yealink.com,syz@yealink.com,pjb@yealink.com,suncw@yealink.com,shijk@yealink.com,yxl@yealink.com,wangqiuy@yealink.com,kongdq@yealink.com,lyh@yealink.com,chensw@yealink.com";
-        System.out.println(findDifferent(a,b));
+    public void test() {
+        get("user/findlist")
+                .send()
+                .bodyText();
     }
 
     @Test
-    public void redisTest() {
+    public void test1() {
+        get("cus/insert")
+                .param("name","lucy")
+                .param("sex",2)
+                .send()
+                .bodyText();
 
     }
 
-    private String findDifferent(String origin, String compare) {
-        if(origin.length() != compare.length()) {
-            return null;
-        }
-        char[] arr1 = origin.toCharArray();
-        char[] arr2 = compare.toCharArray();
-        int errIndex = 0;
-        for(int i = 0; i < arr1.length;i++) {
-            if(arr1[i] == arr2[i]) {
-                continue;
-            }
-            errIndex = i;
-            break;
-        }
-        String oriErr = arrIndexToString(arr1,errIndex);
-        String compErr = arrIndexToString(arr2,errIndex);
-        return oriErr + " : " + compErr;
+    @Test
+    public void test2() {
+        post("/cus/page")
+                .postBody(new MyPagedList<Customer>()
+                        .setSkip(1)
+                        .setPageSize(2))
+                .send()
+                .bodyText();
     }
 
-    private String arrIndexToString(char[] arr, int index) {
-        StringBuffer buffer = new StringBuffer("");
-        for(int i = index-5;i<index+5;i++) {
-            buffer.append(arr[i]);
-        }
-        return buffer.toString();
+    @Test
+    public void parseJson(){
+        String jsonString = "[{\"name\":\"lucy\",\"password\":\"110\",\"id\":\"1\"},{\"name\":\"nick\",\"password\":\"123\",\"id\":\"2\"},{\"name\":\"marry\",\"password\":\"789\",\"id\":\"3\"}]";
+        System.out.println(JSONUtil.format(jsonString));
     }
 }

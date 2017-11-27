@@ -25,6 +25,11 @@ public class StringUtil extends jodd.util.StringUtil {
      */
     private static final String HEX_CHARS = "0123456789ABCDEF";
 
+    /**
+     * is a url String or not
+     */
+    private static final String URL = "^http[s]?=\\/\\/([\\w-]+\\.)+[\\w-]+([\\w-./?%&=]*)?$";
+
     private static final int LONG_SIZE = 18;
 
     /**
@@ -123,6 +128,16 @@ public class StringUtil extends jodd.util.StringUtil {
      */
     public static boolean isEmail(String email) {
         return isRegular(email, REGULAR_EMAIL);
+    }
+
+    /**
+     * 判断字符串是不是http(s) 的 url格式
+     *
+     * @param url
+     * @return true  是， false 不是
+     */
+    public static boolean isUrl(String url) {
+        return isRegular(url, URL);
     }
 
     /**
