@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/xml")
 public class XmlController {
 
-    @GetMapping("/test")
+    @GetMapping(value = "/test",consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
     public XMLResult xmlTest() {
         return new XMLResult().setCode(1).setMessage("this is a XML result test response");
     }

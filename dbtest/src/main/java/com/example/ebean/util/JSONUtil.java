@@ -73,9 +73,21 @@ public class JSONUtil {
      * @return
      */
     public static String format(String jsonString) {
+        if(!isJsonString(jsonString)) {
+            return jsonString;
+        }
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         com.google.gson.JsonParser jp = new com.google.gson.JsonParser();
         JsonElement je = jp.parse(jsonString);
         return gson.toJson(je);
+    }
+
+    public static boolean isJsonString(String json) {
+        try {
+            new JsonParser().parse(json);
+            return true;
+        }catch (Exception e) {
+            return false;
+        }
     }
 }

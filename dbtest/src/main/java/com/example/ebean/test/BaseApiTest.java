@@ -3,6 +3,7 @@ package com.example.ebean.test;
 import com.example.ebean.test.debug.HttpDebug;
 import com.example.ebean.util.JSONUtil;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -52,6 +53,11 @@ public class BaseApiTest {
                 .setMethod(HttpMethod.GET)
                 .setPort(getPort())
                 .setHost(getHost());
+        return this;
+    }
+
+    public BaseApiTest contentType(MediaType type) {
+        httpDebug.setContentType(type);
         return this;
     }
 

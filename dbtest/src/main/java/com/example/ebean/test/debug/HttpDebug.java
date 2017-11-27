@@ -40,7 +40,7 @@ public class HttpDebug extends BaseProsessor{
         return this;
     }
 
-    public HttpDebug setType(MediaType type) {
+    public HttpDebug setContentType(MediaType type) {
         this.defaultType = type;
         return this;
     }
@@ -63,6 +63,33 @@ public class HttpDebug extends BaseProsessor{
         this.url = spliceUrl(url);
         return this;
     }
+
+    //===================== get method ============================
+
+    public String getDefaultHost() {
+        return defaultHost;
+    }
+
+    public Integer getDefaultport() {
+        return defaultport;
+    }
+
+    public MediaType getDefaultType() {
+        return defaultType;
+    }
+
+    public HttpMethod getMethod() {
+        return method;
+    }
+
+    public Map<String, Object> getParams() {
+        return params;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
     //=========================  default property ==============================
 
     private HttpDebug defaultHeaders() {
@@ -122,9 +149,7 @@ public class HttpDebug extends BaseProsessor{
         }catch (Exception e) {
             //TODO 弹出http请求失败的异常
         }finally {
-            if(isNotEmpty(params)) {
-                params.clear();
-            }
+            clear();
         }
         return response;
     }
@@ -149,5 +174,12 @@ public class HttpDebug extends BaseProsessor{
         for(String key : params.keySet()) {
             url += (key + "=" + params.get(key) + "&");
         }
+    }
+
+    private void clear() {
+        if(isNotEmpty(params)) {
+            params.clear();
+        }
+        defaultType = MediaType.APPLICATION_JSON_UTF8;
     }
 }
