@@ -55,7 +55,7 @@ public class UserTest extends BaseApiTest{
         get("/xml/test")
                 .contentType(MediaType.APPLICATION_XML)
                 .send()
-                .bodyText();
+                .xmlBodyText();
     }
 
     @Test

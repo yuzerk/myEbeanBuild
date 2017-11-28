@@ -2,6 +2,7 @@ package com.example.ebean.test;
 
 import com.example.ebean.test.debug.HttpDebug;
 import com.example.ebean.util.JSONUtil;
+import com.example.ebean.util.XmlUtil;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -100,5 +101,12 @@ public class BaseApiTest {
         }
         String jsonString = JSONUtil.serialize(body);
         System.out.println(JSONUtil.format(jsonString));
+    }
+
+    public void xmlBodyText() {
+        Object body = entity.getBody();
+        if(body instanceof String) {
+            System.out.println(XmlUtil.format((String) body));
+        }
     }
 }

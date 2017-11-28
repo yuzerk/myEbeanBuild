@@ -33,6 +33,7 @@ public class XmlUtil {
             }
             return requestXML;
         }catch (Exception e) {
+            System.out.println("xml parse exception");//可以替换成你需要抛出的异常
             return null;
         } finally {
             if (writer != null) {
